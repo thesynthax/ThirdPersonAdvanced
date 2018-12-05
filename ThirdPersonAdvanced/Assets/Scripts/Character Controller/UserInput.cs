@@ -14,12 +14,20 @@ public class UserInput : MonoBehaviour
 {
 	#region Variables and References
 	public StateManager stateMgr;
+	public PlayerMovement pMove;
 	#endregion
 
 	#region Methods
-	public void Start()
+	private void Start()
 	{
 		stateMgr.Init();
+		pMove.Init(this, stateMgr);
+	}
+
+	private void Update()
+	{
+		stateMgr.Tick();
+		pMove.Tick();
 	}
 	#endregion
 }

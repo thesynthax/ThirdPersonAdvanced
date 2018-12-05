@@ -10,6 +10,9 @@ using UnityEngine;
 * -> Contains all the variables for the character controller
 */
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(Rigidbody))]
 public class StateManager : MonoBehaviour 
 {
 	#region Variables and References
@@ -21,7 +24,21 @@ public class StateManager : MonoBehaviour
 	public Animator anim;
 	public CapsuleCollider coll;
 	public Rigidbody rBody;
+	public CharacterStates charStates;
 
+	[Header("Variables")]
+	public Vector3 moveDir;
+	public float fwd;
+	public float turn;
+	[Space]
+	[SerializeField] private int _curState;
+	[SerializeField] private bool _onGround;
+
+	[Header("Constants")]
+	public float moveTurnSpeed = 360f;
+	public float idleTurnSpeed = 180f;
+	public float jumpForce = 8f;
+	public float groundDistance = 0.634f;
 	//Private
 	private GameObject activeModel;
 	#endregion
@@ -63,7 +80,8 @@ public class StateManager : MonoBehaviour
 
 	private void UpdateCharStateNames()
 	{
-
+		_curState = charStates.curState;
+		_onGround = charStates.onGround;
 	}
 
 	private bool RequirementsCleared()
