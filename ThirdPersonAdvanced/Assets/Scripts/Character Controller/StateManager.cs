@@ -20,12 +20,13 @@ public class StateManager : MonoBehaviour
 	[Header("References")]
 	public Transform modelPlaceholder;
 	public GameObject modelInit;
-
+	[Space]
 	public Animator anim;
 	public CapsuleCollider coll;
 	public Rigidbody rBody;
 	public CharacterStates charStates;
-
+	[Space]
+	[HideInInspector] public Transform mainCam;
 	[Header("Variables")]
 	public Vector3 moveDir;
 	public float fwd;

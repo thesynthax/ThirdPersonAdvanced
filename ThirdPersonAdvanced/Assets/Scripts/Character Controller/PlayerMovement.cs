@@ -13,22 +13,46 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour 
 {
 	#region Variables and References
-	private StateManager states;
+	private StateManager stateMgr;
 	private UserInput uInput;
 	#endregion
 
 	#region Methods
 	public void Init(UserInput ui, StateManager st)
 	{
-		states = st;
+		stateMgr = st;
 		uInput = ui;
 	}
 
 	public void Tick()
 	{
-		states.charStates.onGround = OnGround();
+		stateMgr.charStates.onGround = OnGround();
+		Move(ref stateMgr.moveDir, ref stateMgr.turn, ref stateMgr.fwd);
+		Animate(stateMgr.anim, stateMgr.turn, stateMgr.fwd, stateMgr.charStates.onGround);
 	}
 
+	private void Move(ref Vector3 moveDir, ref float turn, ref float fwd)
+	{
+		if (moveDir.magnitude > 1f) moveDir.Normalize();
+		moveDir = transform.InverseTransformDirection(moveDir);
+		turn = Mathf.Atan2(moveDir.x, moveDir.z);
+		fwd = moveDir.z;
+
+		ExtraTurn(stateMgr.idleTurnSpeed, stateMgr.moveTurnSpeed, stateMgr.fwd, stateMgr.turn, Time.deltaTime);
+	}
+
+	private void Animate(Animator anim, float turn, float fwd, bool onGround)
+	{
+		anim.SetFloat(AnimVars.Forward, fwd, 0.1f, Time.deltaTime);
+		anim.SetFloat(AnimVars.Turn, turn, 0.1f, Time.deltaTime);
+		anim.SetBool(AnimVars.OnGround, onGround);
+	}
+
+	private void ExtraTurn(float idleTurnSpeed, float moveTurnSpeed, float fwd, float turn, float time)
+	{
+		float turnSpeed = Mathf.Lerp(idleTurnSpeed, moveTurnSpeed, fwd);
+		transform.Rotate(0, turn * turnSpeed * time, 0);
+	}
 	private bool OnGround()
 	{
 		bool r = false;
@@ -85,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
 	private void FindGround(Vector3 origin, ref RaycastHit hit, ref bool isHit)
 	{
 		Debug.DrawRay(origin, -Vector3.up * 0.5f, Color.red);
-		if (Physics.Raycast(origin, -Vector3.up, out hit, states.groundDistance))
+		if (Physics.Raycast(origin, -Vector3.up, out hit, stateMgr.groundDistance))
 		{
 			isHit = true;
 		}
