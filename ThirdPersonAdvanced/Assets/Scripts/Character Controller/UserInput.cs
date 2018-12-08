@@ -40,6 +40,13 @@ public class UserInput : MonoBehaviour
 
 		stateMgr.Tick();
 		pMove.Tick();
+
+
+	}
+
+	private void OnAnimatorMove()
+	{
+		pMove.OnAnimMove(stateMgr.charStates.onGround, Time.deltaTime, stateMgr.anim, stateMgr.rBody);
 	}
 
 	private void UpdateInputs(Transform cam, ref Vector3 moveDir)

@@ -507,10 +507,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 20554866382904584, guid: d56d7afee8a92c9419d7f12740ee3441,
+    - target: {fileID: 114230730240569696, guid: d56d7afee8a92c9419d7f12740ee3441,
         type: 2}
-      propertyPath: near clip plane
-      value: 0.1
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95322430121830256, guid: d56d7afee8a92c9419d7f12740ee3441,
+        type: 2}
+      propertyPath: m_ApplyRootMotion
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d56d7afee8a92c9419d7f12740ee3441, type: 2}

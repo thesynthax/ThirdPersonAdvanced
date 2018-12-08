@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /* About PlayerMovement
-* -> Converts code into game mechanics
+* -> Converts variables into game mechanics
 */
 
 public class PlayerMovement : MonoBehaviour 
@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
 		turn = Mathf.Atan2(moveDir.x, moveDir.z);
 		fwd = moveDir.z;
 
-		ExtraTurn(stateMgr.idleTurnSpeed, stateMgr.moveTurnSpeed, stateMgr.fwd, stateMgr.turn, Time.deltaTime);
+		ExtraTurn(stateMgr.idleTurnSpeed, stateMgr.moveTurnSpeed, stateMgr.fwd, stateMgr.turn, Time.deltaTime, 0.9f);
 	}
 
 	private void Animate(Animator anim, float turn, float fwd, bool onGround)
@@ -48,11 +48,23 @@ public class PlayerMovement : MonoBehaviour
 		anim.SetBool(AnimVars.OnGround, onGround);
 	}
 
-	private void ExtraTurn(float idleTurnSpeed, float moveTurnSpeed, float fwd, float turn, float time)
+	private void ExtraTurn(float idleTurnSpeed, float moveTurnSpeed, float fwd, float turn, float time, float speed)
 	{
-		float turnSpeed = Mathf.Lerp(idleTurnSpeed, moveTurnSpeed, fwd);
+		float turnSpeed = Mathf.Lerp(idleTurnSpeed, moveTurnSpeed, fwd) * speed;
 		transform.Rotate(0, turn * turnSpeed * time, 0);
 	}
+
+	public void OnAnimMove(bool onGround, float time, Animator anim, Rigidbody rBody)
+	{
+		if (onGround && time > 0f)
+		{
+			Vector3 v = anim.deltaPosition / time;
+
+			v.y = rBody.velocity.y;
+			rBody.velocity = v;
+		}
+	}
+
 	private bool OnGround()
 	{
 		bool r = false;
