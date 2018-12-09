@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
 	#region Variables and References
 	private StateManager stateMgr;
 	private UserInput uInput;
+
+	private Vector3 groundNormal;
 	#endregion
 
 	#region Methods
@@ -35,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		if (moveDir.magnitude > 1f) moveDir.Normalize();
 		moveDir = transform.InverseTransformDirection(moveDir);
+		moveDir = Vector3.ProjectOnPlane(moveDir, groundNormal);
 		turn = Mathf.Atan2(moveDir.x, moveDir.z);
 		fwd = moveDir.z;
 
@@ -124,6 +127,7 @@ public class PlayerMovement : MonoBehaviour
 		if (Physics.Raycast(origin, -Vector3.up, out hit, stateMgr.groundDistance))
 		{
 			isHit = true;
+			groundNormal = hit.normal;
 		}
 	}
 	#endregion

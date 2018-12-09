@@ -40,8 +40,6 @@ public class UserInput : MonoBehaviour
 
 		stateMgr.Tick();
 		pMove.Tick();
-
-
 	}
 
 	private void OnAnimatorMove()
@@ -59,7 +57,7 @@ public class UserInput : MonoBehaviour
 
 		if (cam)
 		{
-			Vector3 camF = Vector3.Scale(cam.forward, new Vector3(1, 0, 1).normalized);
+			Vector3 camF = Vector3.Scale(cam.forward, new Vector3(1, 0, 1)).normalized;
 			moveDir = horizontal * cam.right + vertical * camF;
 		}
 		else
