@@ -29,15 +29,18 @@ public class PlayerMovement : MonoBehaviour
 	public void Tick()
 	{
 		stateMgr.charStates.onGround = OnGround();
-		Move(ref stateMgr.moveDir, ref stateMgr.turn, ref stateMgr.fwd);
+		Move(ref stateMgr.moveDir, ref stateMgr.turn, ref stateMgr.fwd, uInput.sprint);
 		Animate(stateMgr.anim, stateMgr.turn, stateMgr.fwd, stateMgr.charStates.onGround);
 	}
 
-	private void Move(ref Vector3 moveDir, ref float turn, ref float fwd)
+	private void Move(ref Vector3 moveDir, ref float turn, ref float fwd, bool sprint)
 	{
 		if (moveDir.magnitude > 1f) moveDir.Normalize();
 		moveDir = transform.InverseTransformDirection(moveDir);
 		moveDir = Vector3.ProjectOnPlane(moveDir, groundNormal);
+
+		if (sprint) moveDir *= 2;
+
 		turn = Mathf.Atan2(moveDir.x, moveDir.z);
 		fwd = moveDir.z;
 
@@ -48,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		anim.SetFloat(AnimVars.Forward, fwd, 0.1f, Time.deltaTime);
 		anim.SetFloat(AnimVars.Turn, turn, 0.1f, Time.deltaTime);
+		anim.SetInteger(AnimVars.Turn_int, Mathf.RoundToInt(turn));
 		anim.SetBool(AnimVars.OnGround, onGround);
 	}
 

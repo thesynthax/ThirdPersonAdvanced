@@ -12,5 +12,6 @@ public static class AnimVars
 	public static string Forward = "Forward";
 	public static string Turn = "Turn";
 	public static string OnGround = "OnGround";
+	public static string Turn_int = "Turn_int";
 	#endregion
 }

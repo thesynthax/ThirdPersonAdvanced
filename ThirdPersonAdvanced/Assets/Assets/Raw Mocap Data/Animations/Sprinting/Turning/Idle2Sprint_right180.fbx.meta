@@ -200,8 +200,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle2Sprint_right180
       takeName: _116_a_U1_M_P_idle2Sprint_right180__Fb_p180_No_0_PJ_2
-      firstFrame: 38
-      lastFrame: 128
+      firstFrame: 64
+      lastFrame: 100
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -211,12 +211,12 @@ ModelImporter:
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
+      keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0
-      heightFromFeet: 0
+      heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []

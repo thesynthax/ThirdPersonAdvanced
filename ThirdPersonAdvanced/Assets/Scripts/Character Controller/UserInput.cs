@@ -17,11 +17,11 @@ public class UserInput : MonoBehaviour
 	public StateManager stateMgr;
 	public PlayerMovement pMove;
 
-	private float horizontal;
-	private float vertical;
-	private bool jump;
-	private bool walk;
-	private bool sprint;
+	public float horizontal { get; private set; }
+	public float vertical { get; private set; }
+	public bool jump { get; private set; }
+	public bool walk { get; private set; }
+	public bool sprint { get; private set; }
 	#endregion
 
 	#region Methods
