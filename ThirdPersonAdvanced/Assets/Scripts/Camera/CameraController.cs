@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour
 	[Header("References")]
 	public Transform target;
 	public Transform cam;
+	public StateManager stateMgr;
 	[Header("Variables")]
 	public float distance = 5f;
 
@@ -102,6 +103,19 @@ public class CameraController : MonoBehaviour
 		yRotLock = false;
 
 		transform.position = Vector3.Lerp(transform.position, target.position - transform.forward * distance, returnSpeed * Time.deltaTime);
+
+		//ControlFOV(stateMgr.charStates.curState, Time.deltaTime, 1f);
+	}
+
+	private void ControlFOV(int curState, float time, float speed)
+	{
+		float normalFOV = 60f;
+		float increasedFOV = 80f;
+
+		if (curState == 3)
+			cam.GetComponent<Camera>().fieldOfView = Mathf.Lerp(increasedFOV, normalFOV, time * speed);
+		else
+			cam.GetComponent<Camera>().fieldOfView = Mathf.Lerp(normalFOV, increasedFOV, time * speed);
 	}
 	#endregion
 

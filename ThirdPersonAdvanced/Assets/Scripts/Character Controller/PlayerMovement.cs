@@ -29,17 +29,15 @@ public class PlayerMovement : MonoBehaviour
 	public void Tick()
 	{
 		stateMgr.charStates.onGround = OnGround();
-		Move(ref stateMgr.moveDir, ref stateMgr.turn, ref stateMgr.fwd, uInput.sprint);
-		Animate(stateMgr.anim, stateMgr.turn, stateMgr.fwd, stateMgr.charStates.onGround);
+		Move(ref stateMgr.moveDir, ref stateMgr.turn, ref stateMgr.fwd);
+		Animate(stateMgr.anim, stateMgr.turn, stateMgr.fwd, stateMgr.charStates.onGround, uInput.sprint);
 	}
 
-	private void Move(ref Vector3 moveDir, ref float turn, ref float fwd, bool sprint)
+	private void Move(ref Vector3 moveDir, ref float turn, ref float fwd)
 	{
 		if (moveDir.magnitude > 1f) moveDir.Normalize();
 		moveDir = transform.InverseTransformDirection(moveDir);
 		moveDir = Vector3.ProjectOnPlane(moveDir, groundNormal);
-
-		if (sprint) moveDir *= 2;
 
 		turn = Mathf.Atan2(moveDir.x, moveDir.z);
 		fwd = moveDir.z;
@@ -47,11 +45,12 @@ public class PlayerMovement : MonoBehaviour
 		ExtraTurn(stateMgr.idleTurnSpeed, stateMgr.moveTurnSpeed, stateMgr.fwd, stateMgr.turn, Time.deltaTime, 0.9f);
 	}
 
-	private void Animate(Animator anim, float turn, float fwd, bool onGround)
+	private void Animate(Animator anim, float turn, float fwd, bool onGround, bool sprint)
 	{
 		anim.SetFloat(AnimVars.Forward, fwd, 0.1f, Time.deltaTime);
 		anim.SetFloat(AnimVars.Turn, turn, 0.1f, Time.deltaTime);
 		anim.SetInteger(AnimVars.Turn_int, Mathf.RoundToInt(turn));
+		anim.SetBool(AnimVars.Sprint, sprint);
 		anim.SetBool(AnimVars.OnGround, onGround);
 	}
 

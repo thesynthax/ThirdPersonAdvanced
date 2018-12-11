@@ -25,6 +25,7 @@ public class StateManager : MonoBehaviour
 	public CapsuleCollider coll;
 	public Rigidbody rBody;
 	public CharacterStates charStates;
+	public Hashes hashes;
 	[Space]
 	[HideInInspector] public Transform mainCam;
 	[Header("Variables")]
@@ -53,6 +54,7 @@ public class StateManager : MonoBehaviour
 
 	public void Tick()
 	{
+		UpdateStates();
 		UpdateCharStateNames();
 	}
 
@@ -85,9 +87,27 @@ public class StateManager : MonoBehaviour
 		_onGround = charStates.onGround;
 	}
 
+	private void UpdateStates()
+	{
+		if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Ready"))
+		{
+			charStates.curState = 1;
+		}
+		else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Jog"))
+		{
+			charStates.curState = 2;
+		}
+		else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Sprint"))
+		{
+			charStates.curState = 3;
+		}
+	}
+
 	private bool RequirementsCleared()
 	{
-		return true;
+		if (anim.isHuman)
+			return true;
+		return false;
 	}
 	#endregion
 }

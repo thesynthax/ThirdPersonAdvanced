@@ -12,7 +12,7 @@ using UnityEngine;
 public class CharacterStates : ScriptableObject 
 {
 	#region Variables and References
-	public int curState;
+	public int curState = 0;
 	public bool onGround;
 	#endregion
 

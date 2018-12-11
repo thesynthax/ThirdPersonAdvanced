@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 114393382178490470}
   - component: {fileID: 114373538927247854}
   - component: {fileID: 114653611164101592}
+  - component: {fileID: 114836514341357924}
   m_Layer: 0
   m_Name: ControllerBase
   m_TagString: Untagged
@@ -268,7 +269,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 2501cdbcfded9894fb7d005d2c387ab9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -280,7 +281,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1896341655164846}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
@@ -316,6 +317,7 @@ MonoBehaviour:
   coll: {fileID: 136468896262847536}
   rBody: {fileID: 54189388112454902}
   charStates: {fileID: 11400000, guid: 320154149d3e18e479c8ef9372c46a3e, type: 2}
+  hashes: {fileID: 114836514341357924}
   mainCam: {fileID: 0}
   moveDir: {x: 0, y: 0, z: 0}
   fwd: 0
@@ -350,6 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 4337965754289990}
   cam: {fileID: 4741517941501890}
+  stateMgr: {fileID: 114393382178490470}
   distance: 2.5
   yRotMax: 85
   yRotMin: -40
@@ -362,6 +365,20 @@ MonoBehaviour:
   collision:
     serializedVersion: 2
     m_Bits: 15360
+--- !u!114 &114836514341357924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1406812542886378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fc140bd268e8c4497b43f9998aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idle: -1006038295
+  jog: 1145706821
+  sprint: 684512706
 --- !u!136 &136468896262847536
 CapsuleCollider:
   m_ObjectHideFlags: 1
