@@ -41,6 +41,7 @@ public class StateManager : MonoBehaviour
 	public float idleTurnSpeed = 180f;
 	public float jumpForce = 8f;
 	public float groundDistance = 0.634f;
+	public LayerMask ground;
 	//Private
 	private GameObject activeModel;
 	#endregion

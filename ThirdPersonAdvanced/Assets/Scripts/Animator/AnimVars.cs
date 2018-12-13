@@ -14,5 +14,7 @@ public static class AnimVars
 	public static string OnGround = "OnGround";
 	public static string Turn_int = "Turn_int";
 	public static string Sprint = "Sprint";
+	public static string LeftFoot = "LeftFoot";
+	public static string RightFoot = "RightFoot";
 	#endregion
 }

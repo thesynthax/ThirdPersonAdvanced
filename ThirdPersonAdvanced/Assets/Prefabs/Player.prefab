@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 114373538927247854}
   - component: {fileID: 114653611164101592}
   - component: {fileID: 114836514341357924}
+  - component: {fileID: 114952177014600922}
   m_Layer: 0
   m_Name: ControllerBase
   m_TagString: Player
@@ -328,6 +329,9 @@ MonoBehaviour:
   idleTurnSpeed: 180
   jumpForce: 8
   groundDistance: 0.555
+  ground:
+    serializedVersion: 2
+    m_Bits: 15360
 --- !u!114 &114653611164101592
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -379,6 +383,32 @@ MonoBehaviour:
   idle: -1006038295
   jog: 1145706821
   sprint: 684512706
+--- !u!114 &114952177014600922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1406812542886378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f4dd9acc9831914793ccf20eee77cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateMgr: {fileID: 114393382178490470}
+  lookIKWeight: 1
+  bodyWeight: 0.15
+  headWeight: 1
+  eyesWeight: 1
+  clampValue: 1
+  lookAt: {fileID: 0}
+  heightFromGroundRaycast: 1.14
+  raycastDownDist: 1.5
+  pelvisOffset: 0
+  pelvisMoveSpeed: 0.05
+  feetToIKPosSpeed: 0.5
+  FeetIK: 0
+  useProIK: 1
+  debugSolver: 1
 --- !u!136 &136468896262847536
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -389,6 +419,6 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3
-  m_Height: 1.5
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
