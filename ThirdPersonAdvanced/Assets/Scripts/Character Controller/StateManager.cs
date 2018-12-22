@@ -26,6 +26,7 @@ public class StateManager : MonoBehaviour
 	public Rigidbody rBody;
 	public CharacterStates charStates;
 	public Hashes hashes;
+	public UserInput uInput;
 	[Space]
 	[HideInInspector] public Transform mainCam;
 	[Header("Variables")]
@@ -90,15 +91,15 @@ public class StateManager : MonoBehaviour
 
 	private void UpdateStates()
 	{
-		if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Ready"))
+		if (fwd == 0)
 		{
 			charStates.curState = 1;
 		}
-		else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Jog"))
+		else if (fwd > 0 && !uInput.sprint)
 		{
 			charStates.curState = 2;
 		}
-		else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Sprint"))
+		else if (fwd > 0 && uInput.sprint)
 		{
 			charStates.curState = 3;
 		}
