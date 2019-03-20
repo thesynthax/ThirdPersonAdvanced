@@ -9,7 +9,7 @@ namespace AnimFollow
 
 		public readonly int version = 7; // The version of this script
 
-		Animator anim;			// Reference to the animator component.
+		[HideInInspector] public Animator anim;			// Reference to the animator component.
 		HashIDs_AF hash;			// Reference to the HashIDs.
 
 		public float animatorSpeed = 1.3f; // Read by RagdollControl
@@ -60,6 +60,8 @@ namespace AnimFollow
 			transform.Rotate(0f, Input.GetAxis("Mouse X") * mouseSensitivityX * Time.fixedDeltaTime, 0f);
 
 			MovementManagement(Input.GetAxis("Vertical"), Input.GetKey(KeyCode.LeftShift), Input.GetKey(KeyCode.LeftControl));
+			anim.SetBool("Kick", Input.GetKeyDown(KeyCode.K));
+
 		}
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

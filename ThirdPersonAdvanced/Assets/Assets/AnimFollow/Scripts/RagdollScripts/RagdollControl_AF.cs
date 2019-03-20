@@ -29,6 +29,7 @@ namespace AnimFollow
 		Transform masterRootBone;				// A transform representative of the ragdoll position and rotation. Auto assaigned
 		public Transform[] IceOnGetup; // Theese rigidbodies will get slipery during getup to avoid snagging
 		public string[] ignoreCollidersWithTag = {"IgnoreMe"}; // Colliders with these tag will not affect the ragdolls strength
+		public bool disableFall = false;
 
 		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -191,6 +192,8 @@ namespace AnimFollow
 			if (userNeedsToAssignStuff)
 				return;
 
+			disableFall = playerMovement.anim.GetCurrentAnimatorStateInfo(0).IsName("Kick");
+
 			if (stayDeadOnHeadShot && shotInHead)
 			{
 				animFollow.maxTorque = 0f; // Go total ragdoll
@@ -225,14 +228,14 @@ namespace AnimFollow
 
 			limbError = animFollow.totalForceError; // Get Ragdoll distortion from AnimFollow
 			limbErrorMagnitude = limbError.magnitude;
-			
+
 			////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 			// The code below first checks if we are hit with enough force to fall and then do:
 			// inhibit movements in PlayerMovement script, falling, orientate master. ease ragdoll to master pose, play getup animation, go to full strength and anable movements again. 
 
 			// Fall if: we hit with high enough speed or if the distortion of the character to large
-			if (shotByBullet || numberOfCollisions > 0 && (collisionSpeed > graceSpeed || (!(gettingUp || falling) && limbErrorMagnitude > noGhostLimit)) || (limbErrorMagnitude > noGhostLimit2 && orientated))
+			if (!disableFall && (shotByBullet || numberOfCollisions > 0 && (collisionSpeed > graceSpeed || (!(gettingUp || falling) && limbErrorMagnitude > noGhostLimit)) || (limbErrorMagnitude > noGhostLimit2 && orientated)))
 			{
 				if (!falling)
 				{
